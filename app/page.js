@@ -111,25 +111,25 @@ export default function Home() {
   // );
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-indigo-600">
+    <div className="min-h-screen flex flex-col items-center justify-center  bg-gray-50">
     <Hero />
-      <section className="flex flex-col gap-8 px-6 md:px-20 w-full max-w-5xl">
-        <div className="flex-1">
+      <section className=" w-full flex flex-col gap-8 px-6 justify-center items-center">
+        <div className="w-full flex-1">
           <Experience />
         </div>
-        <div className="flex-1">
+        <div className="w-full flex-1">
           <Education />
         </div>
-        <div className="flex-1">
+        <div className=" w-full flex-1">
           <Skills />
         </div>
-        <div className="flex-1">
+        <div className="w-full flex-1">
           <Projects />
         </div>
-        <div className="flex-1">
+        <div className="w-full flex-1">
           <Contact />
         </div>
-        <div className="flex-1">
+        <div className="w-full flex-1">
           <Footer/>
         </div>
       </section>
