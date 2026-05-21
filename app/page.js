@@ -5,7 +5,8 @@ import Education from "./components/Education";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-import Footer from "./components/Footer"; 
+import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsAppButton"; 
 
 
 export default function Home() {
@@ -133,6 +134,7 @@ export default function Home() {
           <Footer/>
         </div>
       </section>
+      <WhatsAppButton phoneNumber="+1234567890" />
     </div>
   );
 

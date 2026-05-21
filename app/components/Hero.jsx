@@ -57,6 +57,21 @@ export default function Hero() {
           >
             Contact Me
           </a>
+          <a
+            href="/CV.md"
+            download="Abdullah_Ibraheem_CV.md"
+            className="px-6 py-2 border border-green-600 text-green-700 rounded-lg hover:bg-green-50"
+          >
+            Export CV
+          </a>
+          <a
+            href="/cv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2 border border-purple-600 text-purple-700 rounded-lg hover:bg-purple-50"
+          >
+            Export PDF
+          </a>
         </div>
       </motion.div>
 
