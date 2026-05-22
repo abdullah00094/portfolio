@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from '../app/components/Navbar';
+import { headers } from "next/headers";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
 
@@ -19,13 +19,17 @@ export const metadata = {
 };
 
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const headersList = await headers();
+  const pathname = headersList.get("x-url-pathname") ?? "";
+  const showSiteChrome = pathname !== "/under-construction";
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Sidebar />
+        {showSiteChrome && <Sidebar />}
         {children}
       </body>
     </html>
