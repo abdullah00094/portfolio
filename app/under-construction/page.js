@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { WHATSAPP_URL } from "../lib/whatsapp";
+
 export const metadata = {
   title: "Under Construction | Abdullah Portfolio",
   description: "This site is being updated. Check back soon.",
@@ -19,10 +22,20 @@ export default function UnderConstructionPage() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
           <a
-            href="mailto:your.email@example.com"
-            className="px-6 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition"
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contact on WhatsApp"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition"
           >
-            Contact me
+            <Image
+              src="/whatsapp.svg"
+              alt=""
+              width={22}
+              height={22}
+              aria-hidden
+            />
+            Contact me on WhatsApp
           </a>
         </div>
         <p className="text-sm text-gray-500 pt-4">

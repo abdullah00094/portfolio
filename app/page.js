@@ -134,7 +134,7 @@ export default function Home() {
           <Footer/>
         </div>
       </section>
-      <WhatsAppButton phoneNumber="+1234567890" />
+      <WhatsAppButton />
     </div>
   );
 
