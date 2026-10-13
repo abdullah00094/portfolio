@@ -1,7 +1,6 @@
-export default function Footer() {
-  return (
-    <footer className="bg-gray-900 text-white py-6 text-center">
-      <p>© {new Date().getFullYear()} Abdullah Ibraheem. All rights reserved.</p>
-    </footer>
-  );
-}
+import { site } from "../content/site";
+export default function Footer(){return <footer className="footer section-shell">
+<span>© {new Date().getFullYear()} {site.name}</span>
+<span>Built as a living product dossier.</span>
+<a href="#home">Back to top ↑</a>
+</footer>}

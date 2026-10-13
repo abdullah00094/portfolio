@@ -1,72 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Home, User, Briefcase, BookOpen, Folder, Mail, Menu, X } from "lucide-react";
-
-export default function Sidebar() {
-  const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("home");
-
-  const links = [
-    { id: "home", label: "Home", icon: <Home size={20} /> },
-    { id: "about", label: "About", icon: <User size={20} /> },
-    { id: "experience", label: "Resume", icon: <Briefcase size={20} /> },
-    { id: "projects", label: "Portfolio", icon: <Folder size={20} /> },
-    { id: "skills", label: "Services", icon: <BookOpen size={20} /> },
-    { id: "contact", label: "Contact", icon: <Mail size={20} /> },
-  ];
-
-  return (
-    <>
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col space-y-6 z-50">
-        {links.map((link) => (
-          <Link
-            key={link.id}
-            href={`#${link.id}`}
-            onClick={() => setActive(link.id)}
-            className={`w-12 h-12 flex items-center justify-center rounded-full shadow-md transition ${
-              active === link.id
-                ? "bg-indigo-600 text-white"
-                : "bg-gray-200 text-gray-600 hover:bg-indigo-100 hover:text-indigo-600"
-            }`}
-          >
-            {link.icon}
-          </Link>
-        ))}
-      </aside>
-
-      {/* Mobile Burger */}
-      <button
-        className="md:hidden fixed top-6 right-6 z-50 p-2 rounded-full bg-indigo-600 text-white"
-        onClick={() => setOpen(!open)}
-      >
-        {open ? <X size={24} /> : <Menu size={24} />}
-      </button>
-
-      {/* Mobile Sidebar */}
-      {open && (
-        <div className="md:hidden fixed inset-0 bg-white z-40 flex flex-col space-y-6 py-20 px-10 shadow-lg">
-          {links.map((link) => (
-            <Link
-              key={link.id}
-              href={`#${link.id}`}
-              onClick={() => {
-                setActive(link.id);
-                setOpen(false);
-              }}
-              className={`flex items-center gap-3 px-4 py-3 rounded-full transition ${
-                active === link.id
-                  ? "bg-indigo-600 text-white"
-                  : "bg-gray-200 text-gray-600 hover:bg-indigo-100 hover:text-indigo-600"
-              }`}
-            >
-              {link.icon}
-              <span className="font-medium">{link.label}</span>
-            </Link>
-          ))}
-        </div>
-      )}
-    </>
-  );
-}
+import { Menu, X } from "lucide-react";
+const links = [["experience","Experience"],["capabilities","Capabilities"],["projects","Case studies"],["education","Learning"],["contact","Contact"]];
+export default function Sidebar() { const [open,setOpen] = useState(false);
+const buttonRef = useRef(null);
+const firstRef = useRef(null); useEffect(() => { if (!open) return; firstRef.current?.focus();
+const close = e => { if (e.key === "Escape") { setOpen(false); buttonRef.current?.focus(); } }; document.addEventListener("keydown", close); return () => document.removeEventListener("keydown", close); }, [open]);
+const nav = <>{links.map(([id,label],i) =>
+<Link ref={i === 0 ? firstRef : undefined} key={id} href={"/#" + id} onClick={() => setOpen(false)}>{String(i+1).padStart(2,"0")} <span>{label}</span>
+</Link>)}<Link href="/cv" onClick={() => setOpen(false)}>CV <span>Résumé</span>
+</Link>
+</>; return <header className="site-header">
+<Link className="wordmark" href="/">AI<span>—</span>01</Link>
+<nav className="desktop-nav" aria-label="Primary">{nav}</nav>
+<button ref={buttonRef} className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "Close menu" : "Open menu"}>{open ? <X/> : <Menu/>}</button>{open && <nav id="mobile-nav" className="mobile-nav" aria-label="Mobile navigation">{nav}</nav>}</header>; }

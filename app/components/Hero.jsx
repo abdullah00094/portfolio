@@ -1,98 +1,37 @@
-"use client";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import { Typewriter } from "react-simple-typewriter";
-import { WHATSAPP_URL } from "../lib/whatsapp";
-
-export default function Hero() {
-  return (
-    <section
-      id="about"
-      className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-20 bg-gray-100"
-    >
-      {/* Left Content */}
-      <motion.div
-        className="flex-1 text-center md:text-left space-y-6"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
-          Hi, I'm{" "}
-          <span className="text-indigo-600">Abdullah Ibraheem</span>
-        </h1>
-
-        {/* Typing Effect */}
-        <h2 className="text-xl md:text-2xl text-indigo-600 font-semibold">
-          <Typewriter
-            words={[
-              "Full-Stack Developer 🚀",
-              "Problem Solver 💡",
-              "Tech Enthusiast 💻",
-              "Lifelong Learner 📚",
-            ]}
-            loop={true}
-            cursor
-            cursorStyle="|"
-            typeSpeed={70}
-            deleteSpeed={50}
-            delaySpeed={1500}
-          />
-        </h2>
-
-        <p className="text-gray-600 max-w-lg">
-          Passionate developer with experience in building scalable web
-          applications, solving complex problems, and always eager to learn new
-          technologies. Welcome to my portfolio!
-        </p>
-        <div className="space-x-4">
-          <a
-            href="#projects"
-            className="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700"
-          >
-            View Projects
-          </a>
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50"
-          >
-            Contact Me
-          </a>
-          <a
-            href="/CV.md"
-            download="Abdullah_Ibraheem_CV.md"
-            className="px-6 py-2 border border-green-600 text-green-700 rounded-lg hover:bg-green-50"
-          >
-            Export CV
-          </a>
-          <a
-            href="/cv"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2 border border-purple-600 text-purple-700 rounded-lg hover:bg-purple-50"
-          >
-            Export PDF
-          </a>
-        </div>
-      </motion.div>
-
-      {/* Right Content - Profile Image */}
-      <motion.div
-        className="flex-1 flex justify-center mb-8 md:mb-0"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-      >
-        <Image
-          src="/images/profile.jpg"
-          alt="Profile"
-          width={300}
-          height={300}
-          className="rounded-l-2xl border-4 border-indigo-600 shadow-lg"
-        />
-      </motion.div>
-    </section>
-  );
-}
+import { ArrowDownRight, ArrowUpRight, Github, MapPin } from "lucide-react";
+import { site } from "../content/site";
+export default function Hero() { return <section id="home" className="hero section-shell">
+<div className="hero-copy">
+<p className="eyebrow">
+<span>Portfolio / 2026</span>
+<span>
+<i/> Available for product & backend work</span>
+</p>
+<h1>{site.headline}</h1>
+<p className="hero-role">{site.role}</p>
+<p className="hero-summary">{site.summary}</p>
+<div className="hero-actions">
+<a className="button primary" href="#projects">Explore case studies <ArrowDownRight size={17}/>
+</a>
+<a className="button" href={"mailto:" + site.email}>Start a conversation <ArrowUpRight size={17}/>
+</a>
+</div>
+<div className="hero-meta">
+<span>
+<MapPin size={15}/>{site.location}</span>
+<a href={site.github} target="_blank" rel="noreferrer">
+<Github size={15}/>GitHub</a>
+<a href="/cv">View CV</a>
+</div>
+</div>
+<div className="portrait-wrap">
+<div className="portrait-index micro">PORTRAIT / SUBJECT 01</div>
+<Image src="/images/profile.jpg" alt="Portrait of Abdullah Ibraheem" width={600} height={720} priority sizes="(max-width: 760px) 90vw, 38vw"/>
+<div className="portrait-caption">
+<b>Product thinking</b>
+<span>×</span>
+<b>Backend depth</b>
+</div>
+</div>
+</section>; }

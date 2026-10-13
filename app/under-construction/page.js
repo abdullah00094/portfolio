@@ -4,6 +4,7 @@ import { WHATSAPP_URL } from "../lib/whatsapp";
 export const metadata = {
   title: "Under Construction | Abdullah Portfolio",
   description: "This site is being updated. Check back soon.",
+  robots: { index: false, follow: false },
 };
 
 export default function UnderConstructionPage() {

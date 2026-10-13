@@ -1,48 +1,52 @@
-"use client";
-import { useEffect, useState } from "react";
-
-export default function CvPrintPage() {
-  const [md, setMd] = useState("");
-
-  useEffect(() => {
-    fetch("/CV.md")
-      .then(res => res.text())
-      .then(setMd);
-  }, []);
-
-  useEffect(() => {
-    if (md) {
-      setTimeout(() => window.print(), 600);
-    }
-  }, [md]);
-
-  return (
-    <div className="cv-print-page" style={{ maxWidth: 900, margin: "0 auto", padding: 24, fontFamily: 'serif', background: 'white' }}>
-      <style>{`
-        @media print {
-          body, html { background: white !important; }
-          .cv-print-page { box-shadow: none !important; }
-        }
-        h1, h2, h3 { color: #312e81; margin-top: 1.5em; }
-        hr, .hr { margin: 2em 0; }
-      `}</style>
-      {md ? (
-        <div className="prose prose-lg" dangerouslySetInnerHTML={{ __html: markdownToHtml(md) }} />
-      ) : (
-        <div>Loading CV...</div>
-      )}
-    </div>
-  );
-}
-
-// Basic markdown to HTML converter (only major blocks for now)
-function markdownToHtml(md) {
-  return md
-    .replace(/^#\s?(.+)$/gm, '<h1>$1</h1>')
-    .replace(/^##\s?(.+)$/gm, '<h2>$1</h2>')
-    .replace(/^\*\*(.+)\*\*$/gm, '<h3>$1</h3>')
-    .replace(/^---+$/gm, '<hr>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/\n<li>/g, '<ul><li>').replace(/<\/li>(?!<li>)/g, '</li></ul>')
-    .replace(/\n/g, '<br>');
-}
+import { site } from "../content/site";
+import { experience } from "../content/experience";
+import { capabilities } from "../content/skills";
+import { education, learning } from "../content/education";
+import { projects } from "../content/projects";
+import PrintButton from "../components/PrintButton";
+export const metadata={title:"CV",description:"CV for Abdullah Ibraheem, Technical Product Owner and Laravel Backend Engineer",alternates:{canonical:"/cv"}};
+export default function CvPage(){return <main id="main-content" className="cv-page">
+<header>
+<p className="micro">CURRICULUM VITAE / 2026</p>
+<h1>{site.name}</h1>
+<h2>{site.role}</h2>
+<p>{site.location} · <a href={"mailto:"+site.email}>{site.email}</a> · {site.phone} · <a href={site.github}>GitHub</a>
+</p>
+<p className="cv-summary">{site.summary}</p>
+<PrintButton/>
+</header>
+<section>
+<h2>Experience</h2>{experience.map(x=>
+<article key={x.role}>
+<div>
+<h3>{x.role} — {x.company}</h3>
+<span>{x.period}</span>
+</div>
+<p>{x.summary}</p>
+<ul>{x.highlights.map(y=>
+<li key={y}>{y}</li>)}</ul>
+</article>)}</section>
+<section>
+<h2>Capabilities</h2>
+<div className="cv-columns">{capabilities.map(x=>
+<div key={x.title}>
+<h3>{x.title}</h3>
+<p>{x.items.join(" · ")}</p>
+</div>)}</div>
+</section>
+<section>
+<h2>Selected work</h2>{projects.slice(0,4).map(x=>
+<article key={x.slug}>
+<h3>{x.title}</h3>
+<p>{x.outcome}</p>
+</article>)}</section>
+<section>
+<h2>Education & learning</h2>{[...education,...learning].map(x=>
+<article key={x.institution}>
+<div>
+<h3>{x.institution}</h3>
+<span>{x.period}</span>
+</div>
+<p>{x.status}</p>
+</article>)}</section>
+</main>}
